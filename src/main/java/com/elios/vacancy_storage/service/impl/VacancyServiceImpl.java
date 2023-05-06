@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -37,6 +38,9 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     @Transactional
     public List<Long> saveAll(List<VacancyDto> vacancyDtoList) {
+        if (CollectionUtils.isEmpty(vacancyDtoList)) {
+            return List.of();
+        }
         List<Vacancy> entities = modelMapper.map(vacancyDtoList, VACANCY_LIST);
         return StreamSupport.stream(vacancyDao.saveAll(entities).spliterator(), false)
                 .map(Vacancy::getId)

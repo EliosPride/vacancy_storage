@@ -1,4 +1,4 @@
-package com.elios.vacancy_storage.common;
+package com.elios.vacancy_storage.common.config;
 
 
 import lombok.RequiredArgsConstructor;

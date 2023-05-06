@@ -1,4 +1,4 @@
-package com.elios.vacancy_storage.common;
+package com.elios.vacancy_storage.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
