@@ -27,9 +27,9 @@ public class VacancyController {
     @GetMapping
     public List<VacancyDto> getAll(@RequestParam(required = false, defaultValue = "0") int page,
                                    @RequestParam(required = false, defaultValue = "50") int size,
-                                   @RequestParam(required = false, defaultValue = "location") String sort,
+                                   @RequestParam(required = false, defaultValue = "location") String sortColumn,
                                    @RequestParam(required = false, defaultValue = "ASC") String sortDirection) {
-        return vacancyService.getAll(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDirection), sort)));
+        return vacancyService.getAll(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortDirection), sortColumn)));
     }
 
     @GetMapping("/top")

@@ -27,11 +27,15 @@ public class StorageClientImpl implements StorageClient {
             Optional.ofNullable(vacancyResponse)
                     .map(VacancyResponse::getVacancies)
                     .ifPresent(vacancyDtoList::addAll);
-            url = Optional.ofNullable(vacancyResponse)
-                    .map(VacancyResponse::getVacancyLinks)
-                    .map(VacancyLink::getNext)
-                    .orElse(null);
+            url = getNextPageUrl(vacancyResponse);
         } while (StringUtils.hasLength(url));
         return vacancyDtoList;
+    }
+
+    private String getNextPageUrl(VacancyResponse vacancyResponse) {
+        return Optional.ofNullable(vacancyResponse)
+                .map(VacancyResponse::getVacancyLinks)
+                .map(VacancyLink::getNext)
+                .orElse(null);
     }
 }
